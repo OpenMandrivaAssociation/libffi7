@@ -3,13 +3,13 @@
 #gw: keep the major, as there's another libffi from gcc
 %define develname %mklibname -d ffi %major
 Name:		libffi
-Version:	3.0.5
-Release:	%mkrel 2
+Version:	3.0.6
+Release:	%mkrel 1
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
 License:	BSD
 URL:		http://sourceware.org/libffi
-Source0:	http://sourceware.org/libffi/libffi-%{version}.tar.gz
+Source0:	ftp://sourceware.org/pub/libffi/libffi-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
