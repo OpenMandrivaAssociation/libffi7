@@ -4,7 +4,7 @@
 %define develname %mklibname -d ffi %major
 Name:		libffi
 Version:	3.0.6
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
 License:	BSD
@@ -78,8 +78,8 @@ Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
 Provides:	 libffi-devel = %version-%release
 Provides:	 ffi5-devel = %version-%release
-#gw gcc's libffi-devel will be renamed like this:
-Conflicts:	 %mklibname -d ffi 4
+#gw gcc's libffi4-devel package is biarch
+Conflicts:	 libffi4-devel
 
 %description -n %develname
 This package contains libraries and header files for developing
