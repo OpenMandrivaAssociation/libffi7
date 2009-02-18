@@ -3,7 +3,7 @@
 #gw: keep the major, as there's another libffi from gcc
 %define develname %mklibname -d ffi %major
 Name:		libffi
-Version:	3.0.7
+Version:	3.0.8
 Release:	%mkrel 1
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
