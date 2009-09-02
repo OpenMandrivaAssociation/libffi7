@@ -4,7 +4,7 @@
 %define develname %mklibname -d ffi %major
 Name:		libffi
 Version:	3.0.8
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
 License:	BSD
