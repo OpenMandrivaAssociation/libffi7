@@ -1,10 +1,10 @@
-%define major 5
-%define libname %mklibname ffi %major
-#gw: keep the major, as there's another libffi from gcc
-%define develname %mklibname -d ffi %major
+%define major		5
+%define libffi		%mklibname ffi %{major}
+%define libffi_devel	%mklibname -d ffi
+
 Name:		libffi
 Version:	3.0.10
-Release:	%mkrel 1
+Release:	2
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
 License:	BSD
@@ -39,11 +39,11 @@ layer of a fully featured foreign function interface.  A layer must
 exist above `libffi' that handles type conversions for values passed
 between the two languages.  
 
-%package -n %libname
+%package	-n %{libffi}
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
 
-%description -n %libname
+%description	-n %{libffi}
 Compilers for high level languages generate code that follow certain
 conventions.  These conventions are necessary, in part, for separate
 compilation to work.  One such convention is the "calling convention".
@@ -70,18 +70,18 @@ layer of a fully featured foreign function interface.  A layer must
 exist above `libffi' that handles type conversions for values passed
 between the two languages.
 
-%package -n %develname
+%package	-n %{libffi_devel}
 Summary:	Development files for %{name}
 Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libffi} = %{EVRD}
 Requires(post): /sbin/install-info
 Requires(preun): /sbin/install-info
-Provides:	 libffi-devel = %version-%release
-Provides:	 ffi5-devel = %version-%release
-#gw gcc's libffi4-devel package is biarch
-Conflicts:	 libffi4-devel
+Provides:	libffi-devel = %{EVRD}
+Provides:	ffi5-devel = %{EVRD}
+Provides:	ffi-devel = %{EVRD}
+Obsoletes:	%{mklibname -d ffi 5}
 
-%description -n %develname
+%description	-n %{libffi_devel}
 This package contains libraries and header files for developing
 applications that use %{name}.
 
@@ -96,14 +96,9 @@ applications that use %{name}.
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %if %mdvver < 200900
@@ -111,19 +106,19 @@ rm -rf $RPM_BUILD_ROOT
 %postun -p /sbin/ldconfig
 %endif
 
-%post -n %develname
+%post		-n %{libffi_devel}
 %_install_info libffi.info
 
-%preun -n %develname
+%preun		-n %{libffi_devel}
 %_remove_install_info libffi.info
 
 
-%files -n %libname
+%files -n	%{libffi}
 %defattr(-,root,root,-)
 %doc LICENSE README
 %{_libdir}/*.so.%{major}*
 
-%files -n %develname
+%files		-n %{libffi_devel}
 %defattr(-,root,root,-)
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/%{name}-%{version}
