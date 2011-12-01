@@ -97,8 +97,8 @@ applications that use %{name}.
 
 %install
 %makeinstall_std
-find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
-rm -f $RPM_BUILD_ROOT%{_infodir}/dir
+find %{buildroot} -name '*.la' -exec rm -f {} ';'
+rm -f %{buildroot}%{_infodir}/dir
 
 
 %if %mdvver < 200900
