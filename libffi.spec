@@ -73,8 +73,6 @@ between the two languages.
 Summary:	Development files for %{name}
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
-Provides:	libffi-devel = %{EVRD}
-Provides:	ffi5-devel = %{EVRD}
 Provides:	ffi-devel = %{EVRD}
 Obsoletes:	%{mklibname -d ffi 5}
 
