@@ -73,8 +73,6 @@ between the two languages.
 Summary:    Development files for %{name}
 Group:      Development/C
 Requires:   %{libffi} = %{EVRD}
-Requires(post): /sbin/install-info
-Requires(preun): /sbin/install-info
 Provides:   libffi-devel = %{EVRD}
 Provides:   ffi5-devel = %{EVRD}
 Provides:   ffi-devel = %{EVRD}
@@ -95,12 +93,6 @@ applications that use %{name}.
 %makeinstall_std
 find %{buildroot} -name '*.la' -exec rm -f {} ';'
 rm -f %{buildroot}%{_infodir}/dir
-
-%post       -n %{libffi_devel}
-%_install_info libffi.info
-
-%preun      -n %{libffi_devel}
-%_remove_install_info libffi.info
 
 %files -n   %{libffi}
 %doc LICENSE README
