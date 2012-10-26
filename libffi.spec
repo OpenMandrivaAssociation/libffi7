@@ -1,15 +1,15 @@
-%define major       6
-%define libffi      %mklibname ffi %{major}
-%define libffi_devel    %mklibname -d ffi
+%define	major	6
+%define	libname	%mklibname ffi %{major}
+%define	devname	%mklibname -d ffi
 
-Name:       libffi
-Version:    3.0.11
-Release:    3
-Summary:    A portable foreign function interface library
-Group:      System/Libraries
-License:    BSD
-URL:        http://sourceware.org/libffi
-Source0:    ftp://sourceware.org/pub/libffi/libffi-%{version}.tar.gz
+Name:		libffi
+Version:	3.0.11
+Release:	4
+Summary:	A portable foreign function interface library
+Group:		System/Libraries
+License:	BSD
+URL:		http://sourceware.org/%{name}
+Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
 
 %description
 Compilers for high level languages generate code that follow certain
@@ -38,11 +38,11 @@ layer of a fully featured foreign function interface.  A layer must
 exist above `libffi' that handles type conversions for values passed
 between the two languages.
 
-%package    -n %{libffi}
-Summary:    A portable foreign function interface library
-Group:      System/Libraries
+%package -n	%{libname}
+Summary:	A portable foreign function interface library
+Group:		System/Libraries
 
-%description    -n %{libffi}
+%description -n	%{libname}
 Compilers for high level languages generate code that follow certain
 conventions.  These conventions are necessary, in part, for separate
 compilation to work.  One such convention is the "calling convention".
@@ -69,16 +69,16 @@ layer of a fully featured foreign function interface.  A layer must
 exist above `libffi' that handles type conversions for values passed
 between the two languages.
 
-%package    -n %{libffi_devel}
-Summary:    Development files for %{name}
-Group:      Development/C
-Requires:   %{libffi} = %{EVRD}
-Provides:   libffi-devel = %{EVRD}
-Provides:   ffi5-devel = %{EVRD}
-Provides:   ffi-devel = %{EVRD}
-Obsoletes:  %{mklibname -d ffi 5}
+%package -n	%{devname}
+Summary:	Development files for %{name}
+Group:		Development/C
+Requires:	%{libname} = %{EVRD}
+Provides:	libffi-devel = %{EVRD}
+Provides:	ffi5-devel = %{EVRD}
+Provides:	ffi-devel = %{EVRD}
+Obsoletes:	%{mklibname -d ffi 5}
 
-%description    -n %{libffi_devel}
+%description -n %{devname}
 This package contains libraries and header files for developing
 applications that use %{name}.
 
@@ -91,17 +91,14 @@ applications that use %{name}.
 
 %install
 %makeinstall_std
-find %{buildroot} -name '*.la' -exec rm -f {} ';'
-rm -f %{buildroot}%{_infodir}/dir
 
-%files -n   %{libffi}
+%files -n %{libname}
 %doc LICENSE README
-%{_libdir}/*.so.%{major}*
+%{_libdir}/libffi.so.%{major}*
 
-%files      -n %{libffi_devel}
-%{_libdir}/pkgconfig/*.pc
+%files -n %{devname}
+%{_libdir}/pkgconfig/libffi.pc
 %{_libdir}/%{name}-%{version}
-%{_libdir}/*.so
+%{_libdir}/libffi.so
 %{_mandir}/man3/*
 %{_infodir}/libffi.info.*
-
