@@ -4,7 +4,7 @@
 
 Name:		libffi
 Version:	3.0.11
-Release:	4
+Release:	1
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
 License:	BSD
@@ -100,3 +100,4 @@ applications that use %{name}.
 %{_libdir}/libffi.so
 %{_mandir}/man3/*
 %{_infodir}/libffi.info.*
+
