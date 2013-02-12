@@ -3,8 +3,8 @@
 %define	devname	%mklibname -d ffi
 
 Name:		libffi
-Version:	3.0.11
-Release:	2
+Version:	3.0.12
+Release:	1
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
 License:	BSD

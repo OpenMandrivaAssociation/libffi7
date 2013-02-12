@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   libffi-3.0.11.tar.gz: bff6a6c886f90ad5e30dee0b46676e8e0297d81d
+sources:
+  libffi-3.0.12.tar.gz: 463dcb4ae9aea4c52bba12b67fbe4d91ed1e21fd
