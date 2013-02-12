@@ -11,6 +11,13 @@ License:	BSD
 URL:		http://sourceware.org/%{name}
 Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
 
+%track
+prog %name = {
+	url = http://sourceware.org/%{name}
+	regex = "libffi-(__VER__)\.tar\.gz"
+	version = %version
+}
+
 %description
 Compilers for high level languages generate code that follow certain
 conventions.  These conventions are necessary, in part, for separate
