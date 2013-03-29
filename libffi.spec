@@ -1,10 +1,10 @@
-%define	major	6
-%define	libname	%mklibname ffi %{major}
-%define	devname	%mklibname -d ffi
+%define	major 6
+%define	libname %mklibname ffi %{major}
+%define	devname %mklibname -d ffi
 
 Name:		libffi
 Version:	3.0.13
-Release:	1
+Release:	2
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
 License:	BSD
