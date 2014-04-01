@@ -5,7 +5,7 @@
 Summary:	A portable foreign function interface library
 Name:		libffi
 Version:	3.0.13
-Release:	8
+Release:	9
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
@@ -98,6 +98,7 @@ applications that use %{name}.
 
 %install
 %makeinstall_std
+%multiarch_includes %{buildroot}%{_includedir}/ffi.h
 
 %files -n %{libname}
 %{_libdir}/libffi.so.%{major}*
@@ -106,7 +107,7 @@ applications that use %{name}.
 %doc LICENSE README
 %{_libdir}/pkgconfig/libffi.pc
 %{_includedir}/ffi*.h
+%{multiarch_includedir}/ffi.h
 %{_libdir}/libffi.so
 %{_mandir}/man3/*
 %{_infodir}/libffi.info.*
-
