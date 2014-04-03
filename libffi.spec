@@ -1,11 +1,12 @@
 %define major 6
 %define libname %mklibname ffi %{major}
 %define devname %mklibname -d ffi
+%define staticname %mklibname -d -s ffi
 
 Summary:	A portable foreign function interface library
 Name:		libffi
 Version:	3.0.13
-Release:	9
+Release:	10
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
@@ -88,12 +89,25 @@ Obsoletes:	%{mklibname -d ffi 5} < %{EVRD}
 This package contains libraries and header files for developing
 applications that use %{name}.
 
+
+# The static libffi is used to link Host Dalvik while building
+# Android from source - please don't remove it.
+%package -n	%{staticname}
+Summary:	Static libraries for %{name}
+Group:		Development/C
+Requires:	%{devname} = %{EVRD}
+Provides:	ffi-static-devel = %{EVRD}
+
+%description -n %{staticname}
+This package contains static libraries for developing
+applications that use %{name}.
+
 %prep
 %setup -q
 %apply_patches
 
 %build
-%configure2_5x --disable-static
+%configure2_5x --enable-static
 %make
 
 %install
@@ -111,3 +125,6 @@ applications that use %{name}.
 %{_libdir}/libffi.so
 %{_mandir}/man3/*
 %{_infodir}/libffi.info.*
+
+%files -n %{staticname}
+%{_libdir}/*.a
