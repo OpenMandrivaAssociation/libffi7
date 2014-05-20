@@ -28,7 +28,7 @@ diff -up libffi-3.0.13/libffi.pc.in.fixpath libffi-3.0.13/libffi.pc.in
  exec_prefix=@exec_prefix@
  libdir=@libdir@
 -includedir=${libdir}/@PACKAGE_NAME@-@PACKAGE_VERSION@/include
-+includedir=@includedir@
++includedir=@includedir@/
  
  Name: @PACKAGE_NAME@
  Description: Library supporting Foreign Function Interfaces
