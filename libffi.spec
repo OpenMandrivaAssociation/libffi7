@@ -5,13 +5,13 @@
 
 Summary:	A portable foreign function interface library
 Name:		libffi
-Version:	3.0.13
-Release:	13
+Version:	3.1
+Release:	1
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
 Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
-Patch0:		libffi-3.0.13-fix-include-path.patch
+Patch0:		libffi-3.1-fix-include-path.patch
 %track
 prog %{name} = {
 	url = http://sourceware.org/%{name}
