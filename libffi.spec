@@ -107,7 +107,10 @@ applications that use %{name}.
 %apply_patches
 
 %build
-%configure2_5x --enable-static
+%ifarch %arm aarch64
+export CC=gcc
+%endif
+%configure --enable-static
 %make
 
 %install
