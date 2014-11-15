@@ -12,7 +12,7 @@ License:	BSD
 Url:		http://sourceware.org/%{name}
 Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		libffi-3.1-fix-include-path.patch
-Patch1:		arm-stmiaeq.patch
+Patch1:		ffi-3.2.1-sysv.S.patch
 BuildRequires:	autoconf
 
 %track
