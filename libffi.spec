@@ -5,14 +5,13 @@
 
 Summary:	A portable foreign function interface library
 Name:		libffi
-Version:	3.1
-Release:	4
+Version:	3.2
+Release:	1
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
 Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		libffi-3.1-fix-include-path.patch
-Patch1:		libffi-3.1-git-Fix-paths-in-libffi.pc.in.patch
 BuildRequires:	autoconf
 
 %track
