@@ -12,6 +12,7 @@ License:	BSD
 Url:		http://sourceware.org/%{name}
 Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		libffi-3.1-fix-include-path.patch
+Patch1:		aarch64_nfixedargs-ffi-3.2.patch
 BuildRequires:	autoconf
 
 %track
@@ -110,9 +111,9 @@ applications that use %{name}.
 autoreconf -fiv
 
 %build
-%ifarch %arm aarch64
-export CC=gcc
-%endif
+#% ifarch %arm aarch64
+#export CC=gcc
+#% endif
 %configure --enable-static
 %make
 
