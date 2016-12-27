@@ -3,10 +3,13 @@
 %define devname %mklibname -d ffi
 %define staticname %mklibname -d -s ffi
 
+# (tpg) optimize it a bit
+%global optflags %optflags -O3
+
 Summary:	A portable foreign function interface library
 Name:		libffi
 Version:	3.2.1
-Release:	5
+Release:	6
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
