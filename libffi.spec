@@ -9,13 +9,14 @@
 Summary:	A portable foreign function interface library
 Name:		libffi
 Version:	3.2.1
-Release:	6
+Release:	7
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
 Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		libffi-3.1-fix-include-path.patch
 Patch1:		ffi-3.2.1-sysv.S.patch
+Patch2:		libffi-3.2.1-o-tmpfile-eacces.patch
 BuildRequires:	autoconf
 
 %track
