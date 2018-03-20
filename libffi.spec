@@ -9,7 +9,7 @@
 Summary:	A portable foreign function interface library
 Name:		libffi
 Version:	3.2.1
-Release:	7
+Release:	8
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
@@ -18,13 +18,6 @@ Patch0:		libffi-3.1-fix-include-path.patch
 Patch1:		ffi-3.2.1-sysv.S.patch
 Patch2:		libffi-3.2.1-o-tmpfile-eacces.patch
 BuildRequires:	autoconf
-
-%track
-prog %{name} = {
-	url = http://sourceware.org/%{name}
-	regex = "libffi-(__VER__)\.tar\.gz"
-	version = %{version}
-}
 
 %description
 Compilers for high level languages generate code that follow certain
@@ -111,15 +104,15 @@ applications that use %{name}.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 autoreconf -fiv
 
 %build
 %configure --enable-static
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %files -n %{libname}
 %{_libdir}/libffi.so.%{major}*
