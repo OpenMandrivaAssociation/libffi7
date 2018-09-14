@@ -9,7 +9,7 @@
 Summary:	A portable foreign function interface library
 Name:		libffi
 Version:	3.2.1
-Release:	8
+Release:	9
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
@@ -17,6 +17,9 @@ Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		libffi-3.1-fix-include-path.patch
 Patch1:		ffi-3.2.1-sysv.S.patch
 Patch2:		libffi-3.2.1-o-tmpfile-eacces.patch
+Patch3:		libffi-3.1-fix-exec-stack.patch
+Patch4:		libffi-aarch64-rhbz1174037.patch
+Patch5:		libffi-3.1-aarch64-fix-exec-stack.patch
 BuildRequires:	autoconf
 
 %description
@@ -88,7 +91,6 @@ Obsoletes:	%{mklibname -d ffi 5} < %{EVRD}
 %description -n %{devname}
 This package contains libraries and header files for developing
 applications that use %{name}.
-
 
 # The static libffi is used to link Host Dalvik while building
 # Android from source - please don't remove it.
