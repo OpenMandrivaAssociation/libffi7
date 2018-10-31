@@ -9,7 +9,7 @@
 Summary:	A portable foreign function interface library
 Name:		libffi
 Version:	3.2.1
-Release:	9
+Release:	10
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
