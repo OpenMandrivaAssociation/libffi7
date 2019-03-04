@@ -19,7 +19,7 @@ Patch1:		libffi-3.2.1-o-tmpfile-eacces.patch
 Patch2:		libffi-3.1-fix-include-path.patch
 Patch3:		libffi-aarch64-rhbz1174037.patch
 Patch4:		libffi-3.1-aarch64-fix-exec-stack.patch
-#Patch5:		libffi-3.1-riscv.patch
+Patch5:		libffi-3.1-riscv.patch
 BuildRequires:	autoconf
 
 %description
