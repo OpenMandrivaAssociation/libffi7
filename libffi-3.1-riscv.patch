@@ -1,0 +1,89 @@
+diff --git a/Makefile.am b/Makefile.am
+index 0e40451..e973095 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -32,6 +32,7 @@ EXTRA_DIST = LICENSE ChangeLog.v1 ChangeLog.libgcj			\
+ 	 src/powerpc/asm.h src/powerpc/aix.S src/powerpc/darwin.S	\
+ 	 src/powerpc/aix_closure.S src/powerpc/darwin_closure.S		\
+ 	 src/powerpc/ffi_darwin.c src/powerpc/ffitarget.h		\
++	 src/riscv/ffi.c src/riscv/sysv.S src/riscv/ffitarget.h		\
+ 	 src/s390/ffi.c src/s390/sysv.S src/s390/ffitarget.h		\
+ 	 src/sh/ffi.c src/sh/sysv.S src/sh/ffitarget.h src/sh64/ffi.c	\
+ 	 src/sh64/sysv.S src/sh64/ffitarget.h src/sparc/v8.S		\
+@@ -236,6 +237,9 @@ endif
+ if VAX
+ nodist_libffi_la_SOURCES += src/vax/elfbsd.S src/vax/ffi.c
+ endif
++if RISCV
++nodist_libffi_la_SOURCES += src/riscv/sysv.S src/riscv/ffi.c
++endif
+ 
+ libffi_convenience_la_SOURCES = $(libffi_la_SOURCES)
+ nodist_libffi_convenience_la_SOURCES = $(nodist_libffi_la_SOURCES)
+diff --git a/configure.ac b/configure.ac
+index a7bf5ee..e798142 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -261,6 +261,10 @@ case "$host" in
+ 	TARGET=POWERPC; TARGETDIR=powerpc
+ 	;;
+ 
++  riscv32-*-* | riscv64-*-*)
++	TARGET=RISCV; TARGETDIR=riscv
++	;;
++
+   s390-*-* | s390x-*-*)
+ 	TARGET=S390; TARGETDIR=s390
+ 	;;
+@@ -321,6 +325,7 @@ AM_CONDITIONAL(POWERPC, test x$TARGET = xPOWERPC)
+ AM_CONDITIONAL(POWERPC_AIX, test x$TARGET = xPOWERPC_AIX)
+ AM_CONDITIONAL(POWERPC_DARWIN, test x$TARGET = xPOWERPC_DARWIN)
+ AM_CONDITIONAL(POWERPC_FREEBSD, test x$TARGET = xPOWERPC_FREEBSD)
++AM_CONDITIONAL(RISCV, test x$TARGET = xRISCV)
+ AM_CONDITIONAL(AARCH64, test x$TARGET = xAARCH64)
+ AM_CONDITIONAL(ARC, test x$TARGET = xARC)
+ AM_CONDITIONAL(ARM, test x$TARGET = xARM)
+@@ -590,6 +595,10 @@ AC_ARG_ENABLE(purify-safety,
+     AC_DEFINE(USING_PURIFY, 1, [Define this if you are using Purify and want to suppress spurious messages.])
+   fi)
+ 
++AC_ARG_ENABLE(multi-os-directory,
++[  --disable-multi-os-directory
++                          disable use of gcc --print-multi-os-directory to change the library installation directory])
++                          
+ # These variables are only ever used when we cross-build to X86_WIN32.
+ # And we only support this with GCC, so...
+ if test "x$GCC" = "xyes"; then
+@@ -601,11 +610,13 @@ if test "x$GCC" = "xyes"; then
+     toolexecdir="${libdir}"/gcc-lib/'$(target_alias)'
+     toolexeclibdir="${libdir}"
+   fi
+-  multi_os_directory=`$CC $CFLAGS -print-multi-os-directory`
+-  case $multi_os_directory in
+-    .) ;; # Avoid trailing /.
+-    ../*) toolexeclibdir=$toolexeclibdir/$multi_os_directory ;;
+-  esac
++  if test x"$enable_multi_os_directory" != x"no"; then
++    multi_os_directory=`$CC $CFLAGS -print-multi-os-directory`
++    case $multi_os_directory in
++      .) ;; # Avoid trailing /.
++      ../*) toolexeclibdir=$toolexeclibdir/$multi_os_directory ;;
++    esac
++  fi
+   AC_SUBST(toolexecdir)
+ else
+   toolexeclibdir="${libdir}"
+diff --git a/include/ffi_common.h b/include/ffi_common.h
+index 37f5a9e..cb7916e 100644
+--- a/include/ffi_common.h
++++ b/include/ffi_common.h
+@@ -74,7 +74,9 @@ void ffi_type_test(ffi_type *a, char *file, int line);
+ #define FFI_ASSERT_VALID_TYPE(x)
+ #endif
+ 
++/* v cast to size_t and aligned up to a multiple of a */
+ #define ALIGN(v, a)  (((((size_t) (v))-1) | ((a)-1))+1)
++/* v cast to size_t and aligned down to a multiple of a */
+ #define ALIGN_DOWN(v, a) (((size_t) (v)) & -a)
+ 
+ /* Perform machine dependent cif processing */
