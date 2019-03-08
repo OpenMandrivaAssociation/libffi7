@@ -20,6 +20,7 @@ Patch2:		libffi-3.1-fix-include-path.patch
 Patch3:		libffi-aarch64-rhbz1174037.patch
 Patch4:		libffi-3.1-aarch64-fix-exec-stack.patch
 Patch5:		libffi-3.1-riscv.patch
+Patch6:		libffi-arm-asmsyntax.patch
 BuildRequires:	autoconf
 
 %description
@@ -105,8 +106,7 @@ This package contains static libraries for developing
 applications that use %{name}.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 autoreconf -fiv
 
 %build
