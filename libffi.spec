@@ -14,13 +14,7 @@ Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
 Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
-Patch0:		ffi-3.2.1-sysv.S.patch
 Patch1:		libffi-3.2.1-o-tmpfile-eacces.patch
-Patch2:		libffi-3.1-fix-include-path.patch
-Patch3:		libffi-aarch64-rhbz1174037.patch
-Patch4:		libffi-3.1-aarch64-fix-exec-stack.patch
-Patch5:		libffi-3.1-riscv.patch
-Patch6:		libffi-arm-asmsyntax.patch
 BuildRequires:	autoconf
 
 %description
@@ -50,11 +44,11 @@ layer of a fully featured foreign function interface. A layer must
 exist above `libffi' that handles type conversions for values passed
 between the two languages.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
 
-%description -n	%{libname}
+%description -n %{libname}
 Compilers for high level languages generate code that follow certain
 conventions. These conventions are necessary, in part, for separate
 compilation to work. One such convention is the "calling convention".
@@ -81,8 +75,7 @@ layer of a fully featured foreign function interface. A layer must
 exist above `libffi' that handles type conversions for values passed
 between the two languages.
 
-
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Development files for %{name}
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
@@ -95,7 +88,7 @@ applications that use %{name}.
 
 # The static libffi is used to link Host Dalvik while building
 # Android from source - please don't remove it.
-%package -n	%{staticname}
+%package -n %{staticname}
 Summary:	Static libraries for %{name}
 Group:		Development/C
 Requires:	%{devname} = %{EVRD}
