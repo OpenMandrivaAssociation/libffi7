@@ -113,7 +113,7 @@ autoreconf -fiv
 %{_libdir}/libffi.so.%{major}*
 
 %files -n %{devname}
-%doc LICENSE README
+%doc LICENSE
 %{_libdir}/pkgconfig/libffi.pc
 %{_includedir}/ffi*.h
 %{_libdir}/libffi.so
