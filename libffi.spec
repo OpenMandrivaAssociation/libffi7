@@ -19,7 +19,7 @@
 Summary:	A portable foreign function interface library
 Name:		libffi
 Version:	3.3
-Release:	2
+Release:	3
 Group:		System/Libraries
 License:	BSD
 Url:		http://sourceware.org/%{name}
@@ -162,6 +162,8 @@ applications that use %{name}.
 
 %prep
 %autosetup -p1
+# Don't mess with CFLAGS, we know what we want
+sed -i -e 's,AX_CC_MAXOPT,dnl AX_CC_MAXOPT,g' configure.ac
 autoreconf -fiv
 export CONFIGURE_TOP="$(pwd)"
 %if %{with compat32}
