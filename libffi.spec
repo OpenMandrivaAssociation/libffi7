@@ -18,7 +18,7 @@ Version:	3.3
 Release:	4
 Group:		System/Libraries
 License:	BSD
-Url:		http://sourceware.org/libffi
+Url:		https://sourceware.org/libffi
 Source0:	ftp://sourceware.org/pub/libffi/libffi-%{version}.tar.gz
 Patch1:		libffi-3.2.1-o-tmpfile-eacces.patch
 BuildRequires:	autoconf
