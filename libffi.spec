@@ -21,6 +21,10 @@ License:	BSD
 Url:		https://sourceware.org/libffi
 Source0:	ftp://sourceware.org/pub/libffi/libffi-%{version}.tar.gz
 Patch1:		libffi-3.2.1-o-tmpfile-eacces.patch
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	autoconf
 
 %description
